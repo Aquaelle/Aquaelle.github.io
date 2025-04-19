@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚未读の恋 💌</title>
+    <font size="5"> 
+    <style>
+        /* 日系清新风格 */
+        :root {
+            --main-pink: #FFB3C6;
+            --sub-blue: #B4E4FF;
+            --accent-yellow: #FFF3B0;
+            
+        }
+      
+        .container {
+            text-align: center;
+        }
+        .container img {
+            display: block;
+            margin: 0 auto;
+        }
+        .container p {
+            margin-top: 0;
+        }
+
+       
+        body {
+            font-family: 'HuiFontP109', 'Zen Maru Gothic', cursive;
+            background: #FFF9FB;
+            line-height: 1.6;
+            color: #FF69B4; 
+        }
+
+        /* 章节导航 */
+        .chapter-nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 15px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .chapter-nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        .chapter-nav a {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: var(--mint-green);
+            color: #2B5F4D;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .chapter-nav a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* 故事容器 */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 单个故事卡片 */
+        .story-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .story-thumbnail {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .story-title {
+            color: #E9546B;
+            font-size: 1.2em;
+            margin: 0 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .story-title::before {
+            content: '🍡';
+        }
+
+        .story-summary {
+            color: #FFC0CB;
+            font-size: 0.9em;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        /* 详细内容弹窗 */
+        .story-detail {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            width: 80%;
+            max-width: 800px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            z-index: 200;
+            display: none;
+        }
+
+        .story-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* 背景遮罩 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 150;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<audio id="bgm" loop style="display:none">
+    <source src="https://gitee.com/Fuyuris/yuwayu/raw/master/music/Suiren-a.hisa%23es1Vh.mp3" type="audio/mpeg">
+  </audio>
+    <!-- 章节导航 -->
+    <nav class="chapter-nav">
+        <ul>
+            <li><a href="#chap1">第一章：春樱与未读信笺</a></li>
+            <li><a href="#chap1">第二章：调皮课桌的橡皮诗行</a></li>
+            <li><a href="#chap1">第三章：梅雨蝶与玻璃情书</a></li>
+            <li><a href="#chap2">第四章：柠檬汽水夏夜谜</a></li>
+            <li><a href="#chap2">第五章：秋夜巴士的月光航线</a></li>
+            <li><a href="#chap2">第六章：星图背面的秋纬度</a></li>
+            <li><a href="#chap3">第七章：初雪教室的隐形红线</a></li>
+            <li><a href="#chap8">終章：月月歌</a></li>
+            <li><a href="#chap9">续写你的故事吧…</a></li>
+            <!-- 添加更多章节 -->
+        </ul>
+    </nav>
+
+    <!-- 第一章内容 -->
+    <main id="chap1" class="story-grid">
+        <!-- 故事1 -->
+        <div class="story-card" data-story="story1">
+            <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/1.jpg" alt=" "
+              width="350"
+              height="500" >
+              
+            <h3 class="story-title">🌸 樱吹雪 🌸</h3>
+            <p class="story-summary">国语课本飘落一片樱花。他抬头，转校生踮脚…</p>
+        </div>
+    
+   <!-- 第二章内容 -->
+  
+        <!-- 故事2 -->
+        <div class="story-card" data-story="story2">
+            <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/2.jpg" alt=" "
+            width="350"
+              height="500" >
+
+            <h3 class="story-title">橡皮擦界限</h3>
+            <p class="story-summary">铅笔尖第三次戳到他手肘。"借橡皮。"她…</p>
+        </div>
+     
+<!-- 第三章内容 -->
+     
+          <!-- 故事3 -->
+        <div class="story-card" data-story="story3">
+            <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/3.jpg" alt=" "
+            width="350"
+              height="500" >
+
+            <h3 class="story-title">雨蝶</h3>
+            <p class="story-summary">美术室霉味混着松节油，她踮脚…</p>
+        </div>
+    </main>
+       <!-- 第四章内容 -->
+       <main id="chap2" class="story-grid">
+           <!-- 故事4 -->
+        <div class="story-card" data-story="story4">
+            <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/4.jpg" alt=" "
+            width="350"
+              height="500" >
+
+            <h3 class="story-title">柠檬汽水密码</h3>
+            <p class="story-summary">自动贩卖机吐出第十二罐柠檬汽水时，她终于…</p>
+        </div>
+     
+     <!-- 第五章内容 -->
+      
+           <!-- 故事5 -->
+        <div class="story-card" data-story="story5">
+            <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/5.jpg" alt=" "
+            width="350"
+              height="500" >
+
+            <h3 class="story-title">夜行巴士</h3>
+            <p class="story-summary">修学旅行返程夜，她的额头…</p>
+        </div>
+      
+     <!-- 第六章内容 -->
+        
+            <!-- 故事6 -->
+        <div class="story-card" data-story="story6">
+            <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/6.jpg" alt=" "
+            width="350"
+              height="500" >
+
+            <h3 class="story-title">天文台情书</h3>
+            <p class="story-summary">他总在望远镜旁遗落星图草稿。她收集了…</p>
+        </div>
+       </main>
+    <!-- 第七章内容 -->
+       <main id="chap3" class="story-grid">
+            <!-- 故事7 -->
+        <div class="story-card" data-story="story7">
+            <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/7.jpg" alt=" "
+            width="350"
+              height="500" >
+
+            <h3 class="story-title">暖冬教室</h3>
+            <p class="story-summary">暖桌下忽然多出半块草莓蛋糕。她低头…</p>
+        </div>
+       </main>
+
+
+
+
+        <!-- 继续添加5个故事卡片... -->
+    
+
+    <!-- 故事详情弹窗 -->
+    <div class="overlay" id="overlay"></div>
+    <div class="story-detail" id="detail">
+        <span class="close-btn">×</span>
+        <div class="story-content" id="storyContent"></div>
+    </div>
+
+    <script>
+        // 故事数据
+        const stories = {
+            story1: {
+                title: "🌸 樱吹雪 🌸",
+                content: `
+                    <h2>🌸 樱吹雪 🌸</h2>
+                     <div class="container">
+                    <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/1.jpg" 
+                     width="350"
+                     height="500"
+                    <p>国语课本飘落一片樱花。他抬头，转校生踮脚够窗外的樱枝，裙摆扬起浅青色涟漪。指尖相触时花瓣坠入书页，墨香里洇开一抹淡红。蝉鸣骤响，她耳尖的樱瓣随呼吸轻颤。</p>
+    </div>
+                    
+                `
+            },
+            story2: {
+                title: "橡皮擦界限",
+                content: `
+                    <h2>橡皮擦界限</h2>
+                     <div class="container">
+                    <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/2.jpg" 
+                     width="350"
+                     height="500"
+                    <p>铅笔尖第三次戳到他手肘。"借橡皮。"她扯走半块樱花橡皮，却在习题集空白处画满音符。黄昏洒进靠窗第三排，少年发现橡皮背面多了行小字：致第九次偷看我眼睛的人。</p>
+  </div>
+                    
+                `
+            },
+            story3: {
+                title: "雨蝶",
+                content: `
+                    <h2>雨蝶</h2>
+                     <div class="container">
+                    <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/3.jpg" 
+                     width="350"
+                     height="500"
+                    <p>美术室霉味混着松节油，她踮脚补完壁画最后的蝶翼。雷声碾过屋顶时，他恰好举着伞出现在落地窗前。水痕顺着玻璃蜿蜒而下，将两个影子洇成一片朦胧的靛蓝。</p>
+              </div>
+                    
+                `
+            },
+            story4: {
+                title: "柠檬汽水密码",
+                content: `
+                    <h2>柠檬汽水密码</h2>
+                     <div class="container">
+                    <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/4.jpg" 
+                     width="350"
+                     height="500"
+                    <p>自动贩卖机吐出第十二罐柠檬汽水时，她终于撞见那个每日偷换她饮料的人。少年脖颈挂着暗房钥匙，胶片上全是她捏扁的易拉罐。暗红安全灯里，气泡吻上颤抖的指尖。</p>
+  </div>
+                    
+                `
+            },
+            story5: {
+                title: "夜行巴士",
+                content: `
+                    <h2>夜行巴士</h2>
+                     <div class="container">
+                    <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/5.jpg" 
+                     width="350"
+                     height="500"
+                    <p>修学旅行返程夜，她的额头第三次轻撞他肩膀。掌心的薄荷糖化成一弯月，车载电视闪着雪花屏。当山路转过第七个弯时，假装沉睡的少年悄悄把右肩倾斜了十五度。</p>
+               </div>
+                    
+                `
+            },
+            story6: {
+                title: "天文台情书",
+                content: `
+                    <h2>天文台情书</h2>
+                     <div class="container">
+                    <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/6.jpg" 
+                     width="350"
+                     height="500"
+                    <p>他总在望远镜旁遗落星图草稿。她收集了四十三张，直到梅雨季发现每张背面都写着纬度。顺着数字找到顶楼储物柜，生锈的锁孔里插着朵褪色纸玫瑰，瓣上墨迹未干：118.2°E。</p>
+            </div>
+                    
+                `
+            },
+            story7: {
+                title: "暖冬教室",
+                content: `
+                    <h2>暖冬教室</h2>
+                     <div class="container">
+                    <img src="https://gitee.com/Fuyuris/yuwayu/raw/master/images/7.jpg" 
+                     width="350"
+                     height="500"
+                    <p>暖桌下忽然多出半块草莓蛋糕。她低头假装整理围巾，瞥见他睫毛上的雪正融成细碎银河。窗外暮色漫过空桌椅，玻璃呵气处画着两只歪扭的兔子，中间隔着未擦净的爱心。</p>
+   </div>
+                    
+                `
+            },
+
+
+
+            // 添加其他故事数据...
+        };
+
+        // 打开故事详情
+        document.querySelectorAll('.story-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const storyId = card.dataset.story;
+                document.getElementById('storyContent').innerHTML = stories[storyId].content;
+                document.getElementById('detail').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            });
+        });
+
+        // 关闭弹窗
+        document.querySelector('.close-btn').addEventListener('click', closeDetail);
+        document.getElementById('overlay').addEventListener('click', closeDetail);
+
+        function closeDetail() {
+            document.getElementById('detail').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+  document.addEventListener('click', function initAudio() {
+    const bgm = document.getElementById('bgm');
+    bgm.play().catch(() => {});
+    document.removeEventListener('click', initAudio);
+  });
+    </script>
+</body>
+</html>
