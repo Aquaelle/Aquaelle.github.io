@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📚未读の恋 💌</title>
+    <title>📚未読の恋文 💌</title>
     <font size="5"> 
     <style>
         /* 日系清新风格 */
@@ -163,13 +163,223 @@
             z-index: 150;
             display: none;
         }
+
+/* 新增CSS样式 */
+/* 入场动画 */
+.entrance-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff9fb;
+  z-index: 999;
+  animation: fadeOut 2s ease-in-out forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floating-text {
+  font-size: 2em;
+  color: #ff69b4;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 樱花飘落 */
+.cherry-blossoms {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cherry-blossoms::after {
+  content: "🌸";
+  position: absolute;
+  animation: blossomFall 10s linear infinite;
+  opacity: 0;
+}
+
+@keyframes blossomFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* 书页飘动 */
+.story-card {
+  animation: pageFloat 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes pageFloat {
+  0%, 100% { transform: rotate(-1deg) translateY(0); }
+  50% { transform: rotate(2deg) translateY(-10px); }
+}
+
+/* 礼物盒 */
+.gift-box {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: #ff69b4;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(255,105,180,0.3);
+}
+
+.gift-box:hover {
+  transform: scale(1.1) rotate(-10deg);
+}
+
+.gift-box .gift-content {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.gift-box:hover .gift-content {
+  display: block;
+}
+
+.ribbon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #ffd700;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  top: -15px;
+  left: 10px;
+}
+
+/* 新增动画 */
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* 新增CSS */
+/* 书页飘动特效 */
+.floating-pages {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-particle {
+  position: absolute;
+  width: 40px;
+  height: 60px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  transform-origin: left center;
+  animation: pageFly 15s linear infinite;
+  opacity: 0;
+}
+
+@keyframes pageFly {
+  0% {
+    opacity: 0;
+    transform: translateX(-10vw) rotateY(0deg) rotateZ(-30deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateX(110vw) rotateY(720deg) rotateZ(30deg);
+  }
+}
+
+/* 增强版樱花效果 */
+.cherry-blossoms::after {
+  animation: blossomFall 12s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(255,105,180,0.3));
+}
+
+/* 立体礼物盒 */
+.gift-box {
+  perspective: 1000px;
+}
+
+.gift-content {
+  transform-style: preserve-3d;
+  background: linear-gradient(135deg, #fff9fb, #ffe6f0);
+}
+
+.love-letter {
+  background: #fff;
+  padding: 15px;
+  transition: 0.6s;
+  transform: rotateX(20deg);
+  cursor: pointer;
+}
+
+.love-letter.unfolded {
+  transform: rotateX(0deg) translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.photo-wall {
+  display: grid;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.polaroid {
+  background: white;
+  padding: 5px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.message-bottle textarea {
+  width: 100%;
+  height: 80px;
+  border: 1px solid #ffb3c6;
+  padding: 10px;
+  resize: none;
+}
+
+/* 性能优化 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
     </style>
 </head>
 <body>
 <audio id="bgm" loop style="display:none">
-    <source src="http://ws.stream.qqmusic.qq.com/C400004DOl3K09wdhs.m4a?guid=570847856&vkey=3B1EFE7CD676E9C5F1EBBBD505BCB9C4A5B243BFC4BBE2A3BF84F6571E13B78632E9DAEB1B85EE16D09132A9D03EE007FAD9369B1FEA08A1__v2b9ab84e&uin=&fromtag=120032" type="audio/mpeg">
+    <source src="http://ws.stream.qqmusic.qq.com/C400004DOl3K09wdhs.m4a?guid=856735690&vkey=D1FB2D80328A0444D1BAEE982FD87867EAAD231193A750F9478099A44984792AA3C564C5CF6E147CDA9AFA5B1BE19B7A14C9CA1C9A35F91B__v21e2a1734&uin=&fromtag=120032" type="audio/mpeg">
   </audio>
-    <!-- 章节导航 -->
+
+<!-- 在body开始处添加 -->
+<div class="entrance-animation">
+  <div class="cherry-blossoms"></div>
+  <div class="floating-pages"></div>
+  <div class="floating-text">📮 あなたへの手紙が届いています…</div>
+</div>    <!-- 章节导航 -->
     <nav class="chapter-nav">
         <ul>
             <li><a href="#chap1">第一章：春樱与未读信笺</a></li>
@@ -283,6 +493,27 @@
         <div class="story-content" id="storyContent"></div>
     </div>
 
+<!-- 在body结束前添加 -->
+<div class="gift-box">
+  <div class="ribbon"></div>
+  <div class="gift-content">
+    <div class="love-letter folded" onclick="this.classList.toggle('unfolded')">
+      <div class="seal">💌</div>
+    </div>
+    <div class="photo-wall">
+      <div class="polaroid" style="transform: rotate(-3deg)">
+        <img src="https://example.com/memory1.jpg" alt="回忆">
+      </div>
+      <div class="polaroid" style="transform: rotate(4deg)">
+        <img src="https://example.com/memory2.jpg" alt="回忆">
+      </div>
+    </div>
+    <div class="message-bottle">
+      <textarea placeholder="漂流瓶留言..."></textarea>
+      <button onclick="sendMessage()">投递</button>
+    </div>
+  </div>
+</div>
     <script>
         // 故事数据
         const stories = {
@@ -406,6 +637,80 @@
     bgm.play().catch(() => {});
     document.removeEventListener('click', initAudio);
   });
+  document.querySelector('.love-letter-entrance').addEventListener('animationend', () => {
+            document.querySelector('.love-letter-entrance').style.display = 'none';
+        });
+
+        // 完整保留音频播放逻辑
+        document.addEventListener('click', function initAudio() {
+            const bgm = document.getElementById('bgm');
+            bgm.play().catch(() => {});
+            document.removeEventListener('click', initAudio);
+        });
+
+// 增强版樱花系统
+function createBlossoms() {
+  const container = document.querySelector('.cherry-blossoms');
+  setInterval(() => {
+    if (container.children.length < 30) {
+      const petal = document.createElement('div');
+      petal.style.cssText = `
+        left: ${Math.random() * 105}%;
+        animation: blossomFall ${12 + Math.random()*6}s linear infinite;
+        animation-delay: ${Math.random() * 5}s;
+        font-size: ${24 + Math.random()*20}px;
+        opacity: ${0.3 + Math.random()*0.7};
+      `;
+      petal.innerHTML = Math.random() > 0.7 ? "🍃" : "🌸";
+      container.appendChild(petal);
+      
+      // 自动清理
+      setTimeout(() => petal.remove(), 15000);
+    }
+  }, 500);
+}
+
+// 书页生成系统
+function createFlyingPages() {
+  const container = document.querySelector('.floating-pages');
+  setInterval(() => {
+    const page = document.createElement('div');
+    page.className = 'page-particle';
+    page.style.cssText = `
+      top: ${Math.random() * 100}%;
+      animation-delay: ${Math.random() * 5}s;
+      transform: scale(${0.5 + Math.random()});
+    `;
+    container.appendChild(page);
+    
+    setTimeout(() => page.remove(), 15000);
+  }, 3000);
+}
+
+// 礼物盒交互
+function sendMessage() {
+  const textarea = document.querySelector('.message-bottle textarea');
+  if(textarea.value.trim()) {
+    alert('留言已装入漂流瓶！✨');
+    textarea.value = '';
+  }
+}
+
+// 初始化
+window.addEventListener('load', () => {
+  createBlossoms();
+  createFlyingPages();
+  
+  // 动态照片墙
+  document.querySelectorAll('.polaroid').forEach(item => {
+    item.addEventListener('mouseover', () => {
+      item.style.transform = `rotate(${Math.random()*8-4}deg) translateY(-5px)`;
+    });
+    item.addEventListener('mouseout', () => {
+      item.style.transform = `rotate(${Math.random()*8-4}deg)`;
+    });
+  });
+});
     </script>
 </body>
 </html>
