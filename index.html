@@ -93,6 +93,23 @@
             cursor: pointer;
         }
 
+           .story-card::after {
+  content: "点击查看故事 ✨";
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8em;
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: #aaa;
+}
+
+.story-card:hover::after {
+  opacity: 1;
+}
+
+
         .story-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
